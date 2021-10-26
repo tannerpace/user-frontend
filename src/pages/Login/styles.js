@@ -1,26 +1,5 @@
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles } from "@mui/material"
 
-const styles = makeStyles((theme) => ({
-    subtitle: {
-        color: theme.palette.primary.dark,
-        fontSize: "1.4rem",
-    },
-    paper: {
-        minWidth: "662px",
-        minHeight: "600px",
-        [theme.breakpoints.down("xs")]: {
-            minWidth: "100%",
-        },
-    },
-    saveButton: {
-        marginLeft: theme.spacing(2),
-    },
-    btnLabel: {
-        minWidth: "36px",
-    },
-    texfield: {
-        marginTop: theme.spacing(4),
-    },
-}))
+const styles = makeStyles((theme) => ({}))
 
 export default styles

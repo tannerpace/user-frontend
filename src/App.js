@@ -1,20 +1,24 @@
 
 import './App.css';
-import SighUpForm from './components/Forms/SignUpForm';
 import Login from './pages/Login';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { CssBaseline } from '@mui/material';
+import React from 'react';
+
 
 const queryClient = new QueryClient()
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
+    <React.Fragment>
+      <QueryClientProvider client={queryClient}>
+        <CssBaseline />
 
-      <h1>LoginForm</h1>
-      <Login />
-      <h1>SignUpForm</h1>
-      <SighUpForm />
+        <Login />
 
-    </QueryClientProvider>
+
+      </QueryClientProvider>
+    </React.Fragment>
+
   );
 }
 
