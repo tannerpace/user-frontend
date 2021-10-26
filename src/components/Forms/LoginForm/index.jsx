@@ -32,8 +32,13 @@ export default function LoginForm({ setIsLogin }) {
   const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(schema) });
   const loginInMutation = useMutation(userLogin)
   const onSubmit = (data) => {
-    console.log(data)
-    loginInMutation.mutate(data)
+
+    loginInMutation.mutate(data, {
+      onSuccess: (res) => {
+        //do something
+      }
+    })
+
   }
   const toggleLogin = () => {
     setIsLogin()
