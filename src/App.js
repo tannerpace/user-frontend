@@ -9,24 +9,45 @@ import { useEffect, useRef, useState } from "react"
 import { createContext } from "react"
 import { useIndexedDB } from "react-indexed-db"
 import { BrowserRouter } from "react-router-dom"
+import { initDB } from "react-indexed-db"
 
-const queryClient = new QueryClient()
-const Application = () => {
+
+initDB({
+  name: "UserApp",
+  version: 1,
+  objectStoresMeta: [
+    {
+      store: "auth",
+      storeConfig: { keyPath: "id", autoIncrement: true },
+      storeSchema: [
+        { name: "token", keypath: "token" },
+        { name: "account", keypath: "account" },
+      ],
+    },
+  ],
+})
+
+
+
+
+
+
+
+const App = () => {
   return (
-    <React.Fragment>
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          <CssBaseline />
-
-          <Login />
 
 
-        </QueryClientProvider>
-      </BrowserRouter>
-    </React.Fragment>
+
+
+    <Login />
+
+
+
+
+
 
   );
 }
 
-export default Application;
+export default App;
 
