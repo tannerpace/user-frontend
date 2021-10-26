@@ -6,6 +6,8 @@ import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Input, Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useContext } from "react"
+import AppContext from "../../../contexts/App";
 const schema = yup.object({
     userName: yup.string().required(),
     password: yup.string()
@@ -16,6 +18,7 @@ const schema = yup.object({
 export default function SignUpForm({ setIsLogin }) {
     const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(schema) });
     const signUpMutation = useMutation(userSignUp)
+    const Authorization = useContext(AppContext)
     const onSubmit = (data) => {
         console.log(data)
         signUpMutation.mutate(data)
@@ -36,6 +39,7 @@ export default function SignUpForm({ setIsLogin }) {
                 <Button type="submit" variant="contained">Submit</Button>
                 <Button onClick={toggleLogin}>Have Account? <br></br>Login</Button>
             </form>
+            {Authorization ? <h1>Logged IN!</h1> : <h1>Not Logged in</h1>}
         </Box>
     );
 }

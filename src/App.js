@@ -34,17 +34,7 @@ initDB({
 
 const App = () => {
   return (
-
-
-
-
     <Login />
-
-
-
-
-
-
   );
 }
 

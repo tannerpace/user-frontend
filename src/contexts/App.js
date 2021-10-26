@@ -58,10 +58,10 @@ export const AppContainer = ({ children, ...props }) => {
     // Watch token updates and run getMe call
     const getMeQuery = useQuery(["getMe", token], () => getMe(true), {
         enabled: Boolean(token),
-        // onSuccess: (res) => {
-        //     setAuthUserState(res)
-        //     setAuthData({ token, account: res })
-        // },
+        onSuccess: (res) => {
+            setAuthUserState(res)
+            setAuthData({ token, account: res })
+        },
     })
 
     const removeAuthToken = () => {

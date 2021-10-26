@@ -5,10 +5,14 @@ import Page from "../Page"
 import SignUpForm from '../../components/Forms/SignUpForm';
 import { Paper } from '@mui/material';
 import { useState } from 'react';
+import { useContext } from "react";
+import AppContext from "../../contexts/App";
 
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true)
+    const authContext = useContext(AppContext)
+    console.log(`authContext`, authContext)
 
 
     return (

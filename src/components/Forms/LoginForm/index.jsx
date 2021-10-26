@@ -9,12 +9,14 @@ import {
 
   Input,
 } from "@mui/material"
+import { useContext, useState } from "react"
 
-
-import { userLogin } from "../../../actions/User/users"
-import { useMutation } from "react-query"
+import AppContext from "../../../contexts/App"
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useMutation, useQueryClient } from "react-query"
+import serialize from "../../../store/serialize"
+import { userLogin } from "../../../actions/User/users"
 
 
 const schema = yup.object({
@@ -26,18 +28,65 @@ const schema = yup.object({
 }).required();
 
 export default function LoginForm({ setIsLogin }) {
-
+  const [loading, setLoading] = useState(false)
+  const queryClient = useQueryClient()
+  const authContext = useContext(AppContext)
   const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(schema) });
   const loginInMutation = useMutation(userLogin)
+  const Authorization = useContext(AppContext)
   const onSubmit = (data) => {
+    setLoading(true)
+
 
     loginInMutation.mutate(data, {
       onSuccess: (res) => {
-        //do something
-      }
+        console.log(`data logged in`, data)
+        serialize("user", res.user)
+          .then((serializedData) => {
+            authContext.setAuthData({
+              token: res.token,
+              account: serializedData,
+            })
+            authContext.openSnackBar({
+              message: "Login successful!",
+            })
+            return queryClient.setQueryData("user", (oldState) => {
+              return serializedData
+            })
+          })
+          .catch((err) => {
+            authContext.setAuthData({
+              token: res.token,
+              account: res.account,
+            })
+          })
+        //if the user is in the app close the dialog and redirect to my account
+
+      }, onError: (err) => {
+        console.error(err)
+        authContext.openSnackBar({
+          message: "Incorrect email address or password",
+        })
+        setLoading(false)
+      },
     })
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const toggleLogin = () => {
     setIsLogin()
   }
@@ -55,6 +104,7 @@ export default function LoginForm({ setIsLogin }) {
         <Button type="submit" variant="contained">Submit</Button>
         <Button onClick={toggleLogin}>No Account? <br></br>SignUp</Button>
       </form>
+      {Authorization ? <h1>Logged IN!</h1> : <h1>Not Logged in</h1>}
     </Box>
   );
 }

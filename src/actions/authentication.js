@@ -7,7 +7,7 @@ export const getMe = () => {
 }
 
 export const login = (data) => {
-    return api.post("/app/users/auth", data).then((res) => res.data)
+    return api.post("/app/user/auth", data).then((res) => res.data)
 }
 
 export const updateUserProfile = (data) => {
