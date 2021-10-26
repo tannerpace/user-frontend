@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@material-ui/core"
+import { Box, Button, Typography } from "@mui/material"
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { ErrorBoundary } from "react-error-boundary"

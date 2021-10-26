@@ -1,13 +1,11 @@
-import { Box } from "@material-ui/core"
-import { withStyles } from "@material-ui/core/styles"
-import LoginForm from "components/Forms/LoginForm"
-import Page from "pages/Page"
 
-import styles from "./styles"
-import useStyles from "./styles"
+import Box from '@mui/material/Button';
+import LoginForm from "./../../components/Forms/LoginForm"
+import Page from "../Page"
 
-const Index = () => {
-    const classes = useStyles()
+
+const Login = () => {
+
 
     return (
         <Page>
@@ -24,4 +22,4 @@ const Index = () => {
     )
 }
 
-export default withStyles(styles)(Index)
+export default Login
