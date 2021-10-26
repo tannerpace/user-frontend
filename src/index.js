@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AppContainer } from "./contexts/App"
+
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
@@ -30,7 +30,7 @@ const queryClient = new QueryClient({
 
 const Application = (
   <BrowserRouter
-    basename={process.env.NODE_ENV !== "development" ? "" : "/citizen"}
+    basename={process.env.NODE_ENV !== "dev" ? "" : "/production"}
   >
 
     <CssBaseline />

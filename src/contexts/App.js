@@ -1,8 +1,7 @@
 import {
     getMe,
-    login,
-    updatePassword,
-    updateUserProfile,
+
+
 } from "../actions/authentication"
 import { isEmpty } from "lodash"
 import Deferred from "promise-deferred"
