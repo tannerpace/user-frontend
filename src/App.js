@@ -9,6 +9,7 @@ import React from 'react';
 // import { useIndexedDB } from "react-indexed-db"
 // import { BrowserRouter } from "react-router-dom"
 import { initDB } from "react-indexed-db"
+import { BrowserRouter } from "react-router-dom"
 
 
 initDB({
@@ -34,12 +35,20 @@ initDB({
 
 const App = () => {
   return (
-    <AppContainer>
-      <Login />
-    </AppContainer>
+    <BrowserRouter>
+      <AppContainer>
+
+      </AppContainer>
+    </BrowserRouter>
 
   );
 }
 
 export default App;
+
+
+
+
+
+
 
