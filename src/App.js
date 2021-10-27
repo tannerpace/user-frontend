@@ -10,6 +10,9 @@ import React from 'react';
 // import { BrowserRouter } from "react-router-dom"
 import { initDB } from "react-indexed-db"
 import { BrowserRouter } from "react-router-dom"
+import { Switch, Route } from "react-router-dom"
+import GamesList from "../src/components/GamesList"
+import Nav from "./components/Nav"
 
 
 initDB({
@@ -37,7 +40,16 @@ const App = () => {
   return (
     <BrowserRouter>
       <AppContainer>
+        <Nav />
 
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route path="/games">
+            <GamesList />
+          </Route>
+        </Switch>
       </AppContainer>
     </BrowserRouter>
 
