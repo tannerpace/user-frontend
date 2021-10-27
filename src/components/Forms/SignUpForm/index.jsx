@@ -36,8 +36,8 @@ export default function SignUpForm({ setIsLogin }) {
                 <Input {...register("password")} />
                 <p>{errors.password?.message}</p>
 
-                <Button type="submit" variant="contained">Submit</Button>
                 <Button onClick={toggleLogin}>Have Account? <br></br>Login</Button>
+                <Button type="submit" variant="contained">Submit</Button>
             </form>
             {Authorization ? <h1>Logged IN!</h1> : <h1>Not Logged in</h1>}
         </Box>

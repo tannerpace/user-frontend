@@ -13,8 +13,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation, useQueryClient } from "react-query"
 import { useHistory } from "react-router-dom"
 import serialize from "../../../store/serialize"
-import { userLogin } from "../../../actions/User/users"
+// import { userLogin } from "../../../actions/User/users"
 import PropTypes from "prop-types"
+import LinearProgress from '@mui/material/LinearProgress';
 
 
 
@@ -98,19 +99,22 @@ const LoginForm = ({ setIsLogin }) => {
   const toggleLogin = () => {
     setIsLogin()
   }
+  console.log(`authContext.authUser`, authContext.authUser)
 
   useEffect(() => {
     if (authContext && authContext.token) {
       setLoading(false)
 
-      setUserAuthenticated(true)
+      //do something afterlogin
+
 
     }
   }, [authContext])
+
   return (
 
     <Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      {loading ? <LinearProgress color="secondary"></LinearProgress> : <form onSubmit={handleSubmit(onSubmit)}>
         <Typography>Login In Form</Typography>
         <Input {...register("userName")} />
         <p>{errors.userName?.message}</p>
@@ -118,11 +122,13 @@ const LoginForm = ({ setIsLogin }) => {
         <Input {...register("password")} />
         <p>{errors.password?.message}</p>
 
-        <Button type="submit" variant="contained">Submit</Button>
-        <Button onClick={toggleLogin}>No Account? <br></br>SignUp</Button>
-      </form>
 
-      {isUserAuthenticated ? <h1>Logged IN!</h1> : <h1>Not Logged in</h1>}
+        <Button onClick={toggleLogin}>No Account? <br></br>SignUp</Button>
+        <Button type="submit" variant="contained">Submit</Button>
+      </form>}
+
+
+      {authContext.authUser ? <h1>Logged In!</h1> : <h1>Not Logged in</h1>}
     </Box>
   );
 }

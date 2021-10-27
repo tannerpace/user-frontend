@@ -15,7 +15,7 @@ export const pin = (data) => {
     return api.post("/app/user/pin", data)
 }
 
-export const userLogin = (data) => {
-    return api.post("/app/user/auth", data).then((res) => res.data)
-}
+// export const userLogin = (data) => {
+//     return api.post("/app/user/auth", data).then((res) => res.data)
+// }
 
