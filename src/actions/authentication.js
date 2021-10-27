@@ -1,13 +1,17 @@
 import api from "../store/api"
 import serialize from "../store/serialize"
 
+// export const getMe = () => {
+//     const url = `/app/user/me`
+//     return api.get(url).then((res) => serialize("user", res.data.user))
+// }
+
 export const getMe = () => {
     const url = `/app/user/me`
-    return api.get(url).then((res) => serialize("user", res.data.user))
+    return api.get(url).then((res) => res.data.user)
 }
 
 export const login = (data) => {
-
     return api.post("/app/user/auth", data).then((res) => res.data)
 }
 

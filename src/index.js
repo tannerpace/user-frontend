@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material';
+import theme from "./theme/main"
 
 
 const queryClient = new QueryClient({
@@ -36,9 +38,10 @@ const Application = (
 
     <CssBaseline />
     <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
 
-      <App />
-
+        <App />
+      </ThemeProvider>
 
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
