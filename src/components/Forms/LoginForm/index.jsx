@@ -28,7 +28,7 @@ const schema = yup.object({
 }).required();
 
 const LoginForm = ({ setIsLogin }) => {
-  const [isUserAuthenticated, setUserAuthenticated] = useState(false)
+
   const history = useHistory()
 
   const queryClient = useQueryClient()

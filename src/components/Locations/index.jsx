@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Games() {
+export default function Locations() {
     return (
         <div>
-            Games component works!
+            Locations component works!
         </div>
     )
 }

@@ -3,6 +3,7 @@ import {
     login,
 
 } from "../actions/authentication"
+
 import { isEmpty } from "lodash"
 import Deferred from "promise-deferred"
 import PropTypes from "prop-types"
@@ -27,7 +28,7 @@ export const AppContainer = ({ children, ...props }) => {
 
 
     const setAuthData = ({ token, account }) => {
-        console.log(`token was`, token)
+
         console.log(`setting auth data for account`, account)
         clear().then(() => {
             add({ name: "token", token, account }).then(
@@ -81,12 +82,14 @@ export const AppContainer = ({ children, ...props }) => {
     }
     const loginMutation = useMutation(login)
 
+
     return (
         <AppContext.Provider value={{
             setAuthData,
             setToken,
             token,
             authUser,
+
 
             setAuthUserState,
 

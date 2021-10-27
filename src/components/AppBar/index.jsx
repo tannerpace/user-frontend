@@ -7,7 +7,7 @@ export default function Nav() {
         <AppBar>
 
             <Link to="/">Login</Link>
-            <Link to="/Games">Games</Link>
+            <Link to="/locations">Locations</Link>
 
         </AppBar>
     )

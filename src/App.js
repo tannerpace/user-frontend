@@ -11,8 +11,8 @@ import React from 'react';
 import { initDB } from "react-indexed-db"
 import { BrowserRouter } from "react-router-dom"
 import { Switch, Route } from "react-router-dom"
-import GamesList from "../src/components/GamesList"
-import Nav from "./components/Nav"
+import LocationsList from "./components/LocationsList"
+import Nav from "./components/AppBar"
 
 
 initDB({
@@ -46,8 +46,8 @@ const App = () => {
           <Route exact path="/">
             <Login />
           </Route>
-          <Route path="/games">
-            <GamesList />
+          <Route path="/locations">
+            <LocationsList />
           </Route>
         </Switch>
       </AppContainer>
