@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
-import { AppContainer } from "./contexts/App"
+
 
 const queryClient = new QueryClient({
   defaultOptions: {

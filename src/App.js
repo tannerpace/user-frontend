@@ -1,7 +1,7 @@
 
 import './App.css';
 import Login from './pages/Login';
-
+import { AppContainer } from './contexts/App';
 import React from 'react';
 // import PropTypes from "prop-types"
 // import { useEffect, useRef, useState } from "react"
@@ -34,7 +34,10 @@ initDB({
 
 const App = () => {
   return (
-    <Login />
+    <AppContainer>
+      <Login />
+    </AppContainer>
+
   );
 }
 

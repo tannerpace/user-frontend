@@ -1,22 +1,21 @@
 import React from "react"
 import { useForm } from "react-hook-form"
 import {
-
   Box,
   Button,
-
   Typography,
-
   Input,
 } from "@mui/material"
-import { useContext, useState } from "react"
-
-import AppContext from "../../../contexts/App"
+import { useContext, useState, useEffect } from "react"
+import App from "../../../contexts/App"
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation, useQueryClient } from "react-query"
+import { useHistory } from "react-router-dom"
 import serialize from "../../../store/serialize"
 import { userLogin } from "../../../actions/User/users"
+import PropTypes from "prop-types"
+
 
 
 const schema = yup.object({
@@ -27,29 +26,54 @@ const schema = yup.object({
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Password must Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character.')
 }).required();
 
-export default function LoginForm({ setIsLogin }) {
-  const [loading, setLoading] = useState(false)
+const LoginForm = ({ setIsLogin }) => {
+  const [isUserAuthenticated, setUserAuthenticated] = useState(false)
+  const history = useHistory()
+
   const queryClient = useQueryClient()
-  const authContext = useContext(AppContext)
+
+  const [loading, setLoading] = useState(false)
+
+  const authContext = useContext(App)
+
+
+  const { loginMutation } = useContext(App)
+
+
+
   const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(schema) });
-  const loginInMutation = useMutation(userLogin)
-  const Authorization = useContext(AppContext)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const onSubmit = (data) => {
     setLoading(true)
-
-
-    loginInMutation.mutate(data, {
+    let values = data
+    loginMutation.mutate(values, {
       onSuccess: (res) => {
-        console.log(`data logged in`, data)
+        console.log(` succsess res`, res)
         serialize("user", res.user)
-          .then((serializedData) => {
-            authContext.setAuthData({
+          .then(async (serializedData) => {
+            await authContext.setAuthData({
               token: res.token,
               account: serializedData,
             })
             authContext.openSnackBar({
               message: "Login successful!",
             })
+            //if the user is in the app close the dialog and redirect to my account
+
             return queryClient.setQueryData("user", (oldState) => {
               return serializedData
             })
@@ -60,9 +84,8 @@ export default function LoginForm({ setIsLogin }) {
               account: res.account,
             })
           })
-        //if the user is in the app close the dialog and redirect to my account
-
-      }, onError: (err) => {
+      },
+      onError: (err) => {
         console.error(err)
         authContext.openSnackBar({
           message: "Incorrect email address or password",
@@ -70,26 +93,20 @@ export default function LoginForm({ setIsLogin }) {
         setLoading(false)
       },
     })
-
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const toggleLogin = () => {
     setIsLogin()
   }
+
+  useEffect(() => {
+    if (authContext && authContext.token) {
+      setLoading(false)
+
+      setUserAuthenticated(true)
+
+    }
+  }, [authContext])
   return (
 
     <Box>
@@ -104,7 +121,14 @@ export default function LoginForm({ setIsLogin }) {
         <Button type="submit" variant="contained">Submit</Button>
         <Button onClick={toggleLogin}>No Account? <br></br>SignUp</Button>
       </form>
-      {Authorization ? <h1>Logged IN!</h1> : <h1>Not Logged in</h1>}
+
+      {isUserAuthenticated ? <h1>Logged IN!</h1> : <h1>Not Logged in</h1>}
     </Box>
   );
 }
+LoginForm.propTypes = {
+  setIsLogin: PropTypes.func,
+
+}
+
+export default LoginForm

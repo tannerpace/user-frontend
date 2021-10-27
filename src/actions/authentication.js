@@ -7,6 +7,7 @@ export const getMe = () => {
 }
 
 export const login = (data) => {
+
     return api.post("/app/user/auth", data).then((res) => res.data)
 }
 

@@ -1,6 +1,6 @@
 import {
     getMe,
-
+    login,
 
 } from "../actions/authentication"
 import { isEmpty } from "lodash"
@@ -9,20 +9,26 @@ import PropTypes from "prop-types"
 import { useEffect, useRef, useState } from "react"
 import { createContext } from "react"
 import { useIndexedDB } from "react-indexed-db"
-import { useMutation, useQuery } from "react-query"
+import { useMutation, useQuery, useQueryClient } from "react-query"
 import api from "../store/api"
 import { useDebounce } from "use-lodash-debounce"
+
 const AppContext = createContext()
 export default AppContext
+
+
 export const AppContainer = ({ children, ...props }) => {
     const { add, clear, getAll } = useIndexedDB("auth")
     const [authUser, setAuthUserState] = useState(null)
     const [token, setToken] = useState(null)
     const [shouldRender, setShouldRender] = useState(false)
+    const queryClient = useQueryClient()
 
 
 
     const setAuthData = ({ token, account }) => {
+        console.log(`token was`, token)
+        console.log(`setting auth data for account`, account)
         clear().then(() => {
             add({ name: "token", token, account }).then(
                 () => {
@@ -73,20 +79,31 @@ export const AppContainer = ({ children, ...props }) => {
             })
         })
     }
+    const loginMutation = useMutation(login)
 
     return (
-        <AppContainer.Provider value={{
+        <AppContext.Provider value={{
             setAuthData,
             setToken,
-            removeAuthToken,
-            setAuthUserState,
             token,
             authUser,
+
+            setAuthUserState,
+
+            loginMutation,
+
+            removeAuthToken,
+
         }
 
         }>   {shouldRender && children}
             {!shouldRender && null}
-        </AppContainer.Provider>
+        </AppContext.Provider>
     )
+
+}
+
+AppContainer.propTypes = {
+    children: PropTypes.node,
 
 }
