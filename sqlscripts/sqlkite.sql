@@ -6,10 +6,7 @@ CREATE TABLE `mytype`.`users` (
     password varchar(255) not null,
     new_user int DEFAULT (1),
     dateJoined Datetime not null DEFAULT (current_date()),
-
-   
-    
-    primary key (id)
+ primary key (id)
 );
 CREATE TABLE `mytype`.`locations` (
     id int unique not null auto_increment,
@@ -45,6 +42,33 @@ CREATE TABLE `mytype`.`location_comments` (
     foreign key (locationid) references locations(id),
     foreign key (userid) references users(id)
 );
+
+CREATE TABLE `mytype`.`location_images` (
+    id int unique not null auto_increment,
+    locationid int not null,
+    image varchar(250) not null,
+    primary key (id),
+    foreign key (locationid) references locations(id)
+     );
+
+CREATE TABLE `mytype`.`location_videos` (
+    id int unique not null auto_increment,
+    locationid int not null,
+    video varchar(250) not null,
+    primary key (id),
+    foreign key (locationid) references locations(id)
+    );
+
+    CREATE TABLE `mytype`.`messages` (
+    id int unique not null auto_increment,
+    senderid int not null,
+    receiverid int not null,
+    time Datetime not null DEFAULT (current_timestamp),
+    message varchar(250) not null,
+    primary key (id),
+    foreign key (senderid) references users(id),
+    foreign key (receiverid) references users(id)
+    );
 
 INSERT INTO `mytype`.`locations` (`latitude`, `longitude`, `locationname`, `island`, `winddirections`, `waves`, `depth`, `description`, `experience`) VALUES ('32.76562356586255', '-79.82115738187443', 'Sullivan\'s Island 28.5', 'Sullivans', 'S,SW,SE,E,ENE', '3', 'shallow inside', 'This beginner friendly beach is a popular launch spot and is an ideal place to ride throughout the year. It can get crowded with beach goers in the summer months, so be cautious of others on the beach. The water here can range from semi flat to choppy depending on the tides. On windy days, you’re almost certain to encounter kiters on this beach!', 'beginner');
 INSERT INTO `mytype`.`locations` (`latitude`, `longitude`, `locationname`, `island`, `winddirections`, `waves`, `depth`, `description`, `experience`) VALUES ('32.681369379215994', '-79.89118925044373', 'Folly North End', 'Folly Island', 'N,NE,NNE', '4', 'various', 'Folly Beach has a vibrant beachfront community and is home to the Folly Beach Pier. To kite in this spot, drive east along Arctic Avenue until you’re clear of the busier sections of beach. There are plenty of spots where you can pump up and ride here, but if you\'re new to this spot aim to kite in a spot where you already see other kiters. In this spot, be cautious of the rocks on the beach, beach users, and submerged jetties in the waer.', 'intermediate');
