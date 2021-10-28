@@ -27,6 +27,25 @@ CREATE TABLE `mytype`.`locations` (
     primary key (id)
 );
 
+
+CREATE TABLE `mytype`.`location_users` (
+    id int unique not null auto_increment,
+    locationid int not null,
+    userid int not null,
+    primary key (id),
+    foreign key (locationid) references locations(id)
+);
+
+CREATE TABLE `mytype`.`location_comments` (
+    id int unique not null auto_increment,
+    locationid int not null,
+    userid int not null,
+    comment varchar(250) not null,
+    primary key (id),
+    foreign key (locationid) references locations(id),
+    foreign key (userid) references users(id)
+);
+
 INSERT INTO `mytype`.`locations` (`latitude`, `longitude`, `locationname`, `island`, `winddirections`, `waves`, `depth`, `description`, `experience`) VALUES ('32.76562356586255', '-79.82115738187443', 'Sullivan\'s Island 28.5', 'Sullivans', 'S,SW,SE,E,ENE', '3', 'shallow inside', 'This beginner friendly beach is a popular launch spot and is an ideal place to ride throughout the year. It can get crowded with beach goers in the summer months, so be cautious of others on the beach. The water here can range from semi flat to choppy depending on the tides. On windy days, you’re almost certain to encounter kiters on this beach!', 'beginner');
 INSERT INTO `mytype`.`locations` (`latitude`, `longitude`, `locationname`, `island`, `winddirections`, `waves`, `depth`, `description`, `experience`) VALUES ('32.681369379215994', '-79.89118925044373', 'Folly North End', 'Folly Island', 'N,NE,NNE', '4', 'various', 'Folly Beach has a vibrant beachfront community and is home to the Folly Beach Pier. To kite in this spot, drive east along Arctic Avenue until you’re clear of the busier sections of beach. There are plenty of spots where you can pump up and ride here, but if you\'re new to this spot aim to kite in a spot where you already see other kiters. In this spot, be cautious of the rocks on the beach, beach users, and submerged jetties in the waer.', 'intermediate');
 INSERT INTO `mytype`.`locations` (`latitude`, `longitude`, `locationname`, `island`, `winddirections`, `waves`, `depth`, `description`, `experience`) VALUES ('32.688061417805606', '-79.88721424510517', 'Morris Light House', 'Folly', 'N,NNE,NE,ENE', '1', 'deep', 'Go all the way to the end of the painted road. Behind the light house sand bar is a flat water slick. Long walk to get to launch location. Small take off area, with many hazards. ', 'advanced');
