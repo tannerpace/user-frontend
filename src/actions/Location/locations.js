@@ -5,4 +5,8 @@ export const getLocations = () => {
     )
 }
 
+export const getLocation = (id) => {
+    return api.get(`/app/location/get/${id}`).then((res) => res.data.data
+    )
+}
 

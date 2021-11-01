@@ -1,25 +1,26 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme as createMuiTheme } from '@mui/material/styles'
+
 
 const primary = {
-    dark: "#00b2cc",
-    main: "#00e5ff",
-    light: "#6effff",
+    dark: "#6a0080",
+    main: "#9c27b0",
+    light: "#d05ce3",
 }
 const secondary = {
-    main: "#aa00ff",
-    light: "#e254ff",
-    dark: "#7200ca",
+    main: "#00bcd4",
+    light: "#62efff",
+    dark: "#008ba3",
 }
 const error = {
-    main: "#EBF5EE",
+    main: "#F84738",
 }
 const text = {
-    primary: "#22442D",
+    primary: "#190e28",
 }
 
 const spacing = (factor) => factor * 8
 
-export default createTheme({
+export default createMuiTheme({
     spacing,
     palette: {
         primary,

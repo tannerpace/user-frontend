@@ -89,12 +89,8 @@ export const AppContainer = ({ children, ...props }) => {
             setToken,
             token,
             authUser,
-
-
             setAuthUserState,
-
             loginMutation,
-
             removeAuthToken,
 
         }

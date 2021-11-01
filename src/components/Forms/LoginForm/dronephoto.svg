@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1649" height="1019" viewBox="0 0 1649 1019">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #707070;
+        opacity: 0.686;
+        fill: url(#pattern);
+      }
+
+      .cls-2 {
+        stroke: none;
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+    </style>
+    <pattern id="pattern" width="1" height="1" viewBox="29.824 58.65 1589.352 982.141">
+      <image preserveAspectRatio="xMidYMid slice" width="1649" height="1099.441" xlink:href="../../../Desktop/285dronephoto.jpeg"/>
+    </pattern>
+  </defs>
+  <g id="_285dronephoto" data-name="285dronephoto" class="cls-1">
+    <rect class="cls-2" width="1649" height="1019"/>
+    <rect class="cls-3" x="0.5" y="0.5" width="1648" height="1018"/>
+  </g>
+</svg>

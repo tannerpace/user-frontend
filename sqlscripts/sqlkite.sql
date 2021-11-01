@@ -1,13 +1,43 @@
 drop schema if exists mytype;
 CREATE SCHEMA `mytype` ;
+-- CREATE TABLE `mytype`.`users` (
+--     id int unique not null auto_increment,
+--     userName varchar(25) unique not null,
+--     password varchar(255) not null,
+--     new_user int DEFAULT (1),
+--     dateJoined Datetime not null DEFAULT (current_date()),
+--  primary key (id)
+-- );
 CREATE TABLE `mytype`.`users` (
     id int unique not null auto_increment,
     userName varchar(25) unique not null,
     password varchar(255) not null,
-    new_user int DEFAULT (1),
+    screenName varchar(50) not null,
+    bio varchar(255),
+    website varchar(255),
+    birthDate Date not null,
     dateJoined Datetime not null DEFAULT (current_date()),
- primary key (id)
+    profilePic varchar(50), 
+    profileBanner varchar(50),
+    
+    primary key (id)
 );
+
+CREATE TABLE `mytype`.`posts` (
+    id int unique not null auto_increment,
+    post varchar(140) not null,
+    userId int not null,
+    
+    likeCount int default 0,
+    replyTo int,
+   
+
+    primary key (id),
+    foreign key (userId) references users(id)
+   
+);
+
+
 CREATE TABLE `mytype`.`locations` (
     id int unique not null auto_increment,
     latitude Decimal(8,6) ,
@@ -24,13 +54,33 @@ CREATE TABLE `mytype`.`locations` (
     primary key (id)
 );
 
-
 CREATE TABLE `mytype`.`location_users` (
     id int unique not null auto_increment,
     locationid int not null,
     userid int not null,
     primary key (id),
     foreign key (locationid) references locations(id)
+);
+-- make the likes table 
+CREATE TABLE `mytype`.`likes` (
+    id int unique not null auto_increment,
+    userId int,
+    locationId int not null,
+
+    primary key (id),
+    foreign key (userId) references users(id),
+    foreign key (locationId) references locations(id)
+);
+
+-- make the follows table
+CREATE TABLE `mytype`.`follows` (
+    id int unique not null auto_increment,
+    followerId int not null,
+    followingId int not null,
+
+    primary key (id),
+    foreign key (followerId) references users(id),
+    foreign key (followingId) references users(id)
 );
 
 CREATE TABLE `mytype`.`location_comments` (

@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material"
-import Page from "pages/Page"
+import Page from "../Page"
 
 
 

@@ -16,6 +16,7 @@ const schema = yup.object({
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Password must Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character.')
 }).required();
 export default function SignUpForm({ setIsLogin }) {
+
     const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(schema) });
     const signUpMutation = useMutation(userSignUp)
     const Authorization = useContext(AppContext)
@@ -39,7 +40,7 @@ export default function SignUpForm({ setIsLogin }) {
                 <Button onClick={toggleLogin}>Have Account? <br></br>Login</Button>
                 <Button type="submit" variant="contained">Submit</Button>
             </form>
-            {Authorization ? <h1>Logged IN!</h1> : <h1>Not Logged in</h1>}
+
         </Box>
     );
 }

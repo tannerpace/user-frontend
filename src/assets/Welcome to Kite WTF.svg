@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1064" height="128" viewBox="0 0 1064 128">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #707070;
+        font-size: 110px;
+        font-family: HelveticaNeue, Helvetica Neue;
+        mix-blend-mode: darken;
+        isolation: isolate;
+      }
+    </style>
+  </defs>
+  <text id="Welcome_to_Kite_WTF" data-name="Welcome to Kite WTF" class="cls-1" transform="translate(532 105)"><tspan x="-531.685" y="0">Welcome to Kite WTF</tspan></text>
+</svg>

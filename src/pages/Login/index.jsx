@@ -10,10 +10,6 @@ import { useState } from 'react';
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true)
-
-
-
-
     return (
         <Page>
             <Paper>

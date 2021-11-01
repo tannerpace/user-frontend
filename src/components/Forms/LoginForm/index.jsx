@@ -3,8 +3,16 @@ import { useForm } from "react-hook-form"
 import {
   Box,
   Button,
+  CircularProgress,
+  IconButton,
+  InputAdornment,
   Typography,
+
+
+
+
   Input,
+  Divider,
 } from "@mui/material"
 import { useContext, useState, useEffect } from "react"
 import App from "../../../contexts/App"
@@ -16,8 +24,10 @@ import serialize from "../../../store/serialize"
 // import { userLogin } from "../../../actions/User/users"
 import PropTypes from "prop-types"
 import LinearProgress from '@mui/material/LinearProgress';
-
-
+import AppContext from "../../../contexts/App"
+import useStyles from "./styles"
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const schema = yup.object({
   userName: yup.string().required(),
@@ -28,35 +38,17 @@ const schema = yup.object({
 }).required();
 
 const LoginForm = ({ setIsLogin }) => {
-
   const history = useHistory()
 
+  const [visibility, setVisibility] = useState(true)
+  const classes = useStyles()
+
   const queryClient = useQueryClient()
-
   const [loading, setLoading] = useState(false)
-
   const authContext = useContext(App)
-
-
+  const { token } = useContext(App)
   const { loginMutation } = useContext(App)
-
-
-
   const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(schema) });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const onSubmit = (data) => {
     setLoading(true)
@@ -74,6 +66,7 @@ const LoginForm = ({ setIsLogin }) => {
               message: "Login successful!",
             })
             //if the user is in the app close the dialog and redirect to my account
+
 
             return queryClient.setQueryData("user", (oldState) => {
               return serializedData
@@ -106,29 +99,114 @@ const LoginForm = ({ setIsLogin }) => {
       setLoading(false)
 
       //do something afterlogin
+      // console.log(`history push`, history)
+      // history.push("/messages")
 
 
     }
   }, [authContext])
 
   return (
+    <Box className={classes.root}>
+      <Box className={classes.inputContainer}>
+        {loading ? <LinearProgress
+          color="secondary">
 
-    <Box>
-      {loading ? <LinearProgress color="secondary"></LinearProgress> : <form onSubmit={handleSubmit(onSubmit)}>
-        <Typography>Login In Form</Typography>
-        <Input {...register("userName")} />
-        <p>{errors.userName?.message}</p>
+        </LinearProgress> :
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+          ><Typography className={classes.welcome}>
+              Welcome to Kite.io</Typography>
+            {/* <Typography className={classes.loginHeader}
+          >
+            Login In
+          </Typography> */}
+            <Box className={classes.feildContainer}>
+              <Input
+                style={{
+                  color: "offwhite",
+                  borderRadius: "5px",
+                  marginTop: "1.2em",
+                  backgroundColor: "rgba(237, 237, 237, 0.5)",
+                }}
+                {...register("userName")}
+              />
+              <Typography className={classes.formHelperText}
+              >{errors.userName?.message}</Typography>
+              <br></br>
+              <Input
+                style={{
+                  borderRadius: "5px",
+                  marginTop: "-0.5em",
+                  backgroundColor: "rgba(237, 237, 237, 0.5)",
+                }}
 
-        <Input {...register("password")} />
-        <p>{errors.password?.message}</p>
+                {...register("password")}
+
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        size="small"
+                        onClick={
+                          () => setVisibility(!visibility)}
+                      >
+                        {visibility ? (
+                          <VisibilityIcon
+                            color="primary"
+                            fontSize="small"
+                          />
+                        ) : (
+                          <VisibilityOffIcon
+                            color="primary"
+                            fontSize="small"
+                          />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }} />
+              <Typography>{errors.password?.message}</Typography>
+
+              <Button className={classes.loginButton}
+                type="submit"
+                variant="text"
+
+                disabled={loading}
+
+              >
+                Login
+              </Button>
+              <br></br>
+              <Typography
+                onClick={toggleLogin}
+                className={classes.noAccount}>
+                No Account?
+                Click Here
+              </Typography>
+            </Box>
 
 
-        <Button onClick={toggleLogin}>No Account? <br></br>SignUp</Button>
-        <Button type="submit" variant="contained">Submit</Button>
-      </form>}
 
 
-      {authContext.authUser ? <h1>Logged In!</h1> : <h1>Not Logged in</h1>}
+
+
+
+
+
+
+
+
+
+
+
+          </form>}
+
+
+        {/* {authContext.authUser ? <h1> authUser Logged In!</h1> : <h1>authUser Not Logged in</h1>}
+      {token ? <h1> Token Logged In!</h1> : <h1>Token Not Logged in</h1>} */}
+      </Box >
     </Box>
   );
 }
