@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useLocation } from 'react-router';
 import { getLocations } from '../../actions/Location/locations';
-import { makeStyles } from '@mui/styles';
+import useStyles from "./styles"
 import {
     Table,
     TableBody,
@@ -16,41 +16,11 @@ import {
     Grid,
     Typography,
     TablePagination,
+    Button,
+    Input,
     TableFooter
 } from "@mui/material"
 
-const useStyles = makeStyles((theme) => ({
-    table: {
-        minWidth: 650,
-    },
-    tableContainer: {
-        borderRadius: 15,
-        margin: '10px 10px',
-        maxWidth: 950
-    },
-    tableHeaderCell: {
-        fontWeight: 'bold',
-        backgroundColor: theme.palette.primary.dark,
-        color: theme.palette.getContrastText(theme.palette.primary.dark)
-    },
-    avatar: {
-        backgroundColor: theme.palette.primary.light,
-        color: theme.palette.getContrastText(theme.palette.primary.light)
-    },
-    name: {
-        fontWeight: 'bold',
-        color: theme.palette.secondary.dark
-    },
-    status: {
-        fontWeight: 'bold',
-        fontSize: '0.75rem',
-        color: 'white',
-        backgroundColor: 'grey',
-        borderRadius: 8,
-        padding: '3px 10px',
-        display: 'inline-block'
-    }
-}));
 
 const columns = [
 
@@ -78,16 +48,9 @@ function MyTable() {
     const { data: locations } = useQuery("locationList", () => getLocations())
     const classes = useStyles();
 
-
-    const handleRowClick = (event, row) => {
-        // history.push(`/location/${row.id}`)
-
-        console.log(`event`, event)
-
-        console.log("row", row)
+    const handleLocationClick = (event) => {
+        history.push(`/location/get/${event.target.value}`)
     }
-
-
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -107,7 +70,7 @@ function MyTable() {
                         <TableCell className={classes.tableHeaderCell}>Location </TableCell>
                         <TableCell className={classes.tableHeaderCell}>Wind Directions</TableCell>
                         <TableCell className={classes.tableHeaderCell}>Experience </TableCell>
-                        <TableCell className={classes.tableHeaderCell}>Safe Today?</TableCell>
+                        <TableCell className={classes.tableHeaderCell}>Ok</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -115,13 +78,12 @@ function MyTable() {
                         <TableRow key={row.id} data={locations}>
                             <TableCell>
                                 <Grid container>
-                                    <Grid item lg={4}>
-                                        <Avatar alt={row.name} src='.' className={classes.avatar} />
+                                    <Grid item lg={2}>
+                                        <Avatar alt={row.locationname} src='.' className={classes.avatar} />
                                     </Grid>
-                                    <Grid item lg={8}>
-                                        <Typography className={classes.name}>{row.name}</Typography>
-                                        <Typography color="textSecondary" variant="body2">{row.locationname}</Typography>
-
+                                    <Grid item lg={10}>
+                                        <Typography className={classes.name}>{row.locationname}</Typography>
+                                        <Input value={row.id} onClick={handleLocationClick} className={classes.idLink}></Input>
                                     </Grid>
                                 </Grid>
                             </TableCell>
@@ -130,7 +92,7 @@ function MyTable() {
                                 {/* <Typography color="textSecondary" variant="body2">{row.company}</Typography> */}
                             </TableCell>
                             <TableCell>{row.experience}</TableCell>
-                            <TableCell onClick={handleRowClick}>
+                            <TableCell >
                                 <Typography
                                     name="id"
                                     data={locations}
@@ -142,7 +104,8 @@ function MyTable() {
                                                 (row.status === 'Blocked' && 'orange'))
                                     }}
 
-                                >{row.id}</Typography>
+                                >{row.locationname}
+                                </Typography>
                             </TableCell>
                         </TableRow>
                     ))}
