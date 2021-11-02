@@ -10,14 +10,15 @@ import Loader from "react-loader-spinner";
 const Location = () => {
     const { id } = useParams();
     const { data, status } = useQuery(["location", id], () => getLocation(id))
+
     if (status === "loading") {
-        return <Loader type={"Puff"} height={"50%"} width={'auto'} />;
+        return <Loader color="#90caf9" type={"Puff"} height={"50%"} width={'auto'} />;
     }
     if (status === "error") {
-        return <div>Error</div>;
+        return <pre>{JSON.stringify(status.error)}</pre>;
     }
     return (
-        <LocationCard location={data} />
+        <LocationCard data={data} />
     );
 }
 //export the component
