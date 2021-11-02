@@ -38,12 +38,9 @@ initDB({
 
 const App = () => {
   return (
-
     <AppContainer>
       <MiniDrawer />
     </AppContainer>
-
-
   );
 }
 
