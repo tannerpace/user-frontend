@@ -5,7 +5,6 @@ import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -15,46 +14,19 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { Switch } from 'react-router';
-import Login from '../../pages/Login';
-
-import MyTable from '../MyTable';
-import User from '../User';
-import Location from '../Location';
-import { Redirect } from "react-router-dom"
 import MessageIcon from '@mui/icons-material/Message';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PageviewIcon from '@mui/icons-material/Pageview';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import PeopleIcon from '@mui/icons-material/People';
-import Messages from '../Messages';
-import UsersList from '../UsersList';
-import MyUsersList from '../UsersList';
-import LogoutIcon from '@mui/icons-material/Logout';
 import AppContext from '../../contexts/App';
-// import Route from "../Route"
-import { BiHome, BiHomeCircle } from 'react-icons/bi';
-import { GiCrown } from 'react-icons/gi';
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Router from '../../Router';
 import { withRouter } from 'react-router';
 import { useContext } from 'react';
-import Menu from '@mui/icons-material/Menu';
 import { MenuItem } from '@mui/material';
-import { FaAppStore, FaCarCrash, FaHome } from 'react-icons/fa';
-import { FcAcceptDatabase, FcAutomotive, FcBadDecision, FcBearish, FcBusinessman, FcCloseUpMode, FcComments, FcElectricity, FcExpand, FcGoogle, FcHome, FcMenu, FcMultipleSmartphones, FcRadarPlot } from 'react-icons/fc';
-import { FcAbout } from 'react-icons/fc';
-import { FcCustomerSupport } from 'react-icons/fc';
-import { FcAddressBook } from 'react-icons/fc';
-
-
-
-
-
-
+import { FaHome } from 'react-icons/fa';
+import useStyles from "./styles"
 
 const drawerWidth = 240;
 
@@ -124,13 +96,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const MiniDrawer = () => {
+    const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const { removeAuthToken } = useContext(AppContext);
     const history = useHistory();
     const authContext = useContext(AppContext);
     const [anchorEl, setAnchorEl] = React.useState(null);
-
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -143,11 +115,11 @@ const MiniDrawer = () => {
         console.log(event.currentTarget);
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
 
-    //function to logout
     const handleLogout = () => {
         removeAuthToken();
         history.push("/");
@@ -155,7 +127,7 @@ const MiniDrawer = () => {
     return (
         <Box sx={{ display: 'flex' }}>
             {/* <CssBaseline /> */}
-            <AppBar position="fixed" open={open}>
+            <AppBar position="fixed" open={open} className={classes.top}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -174,8 +146,6 @@ const MiniDrawer = () => {
                     </Typography>
                     {authContext.authUser && (
                         <div>
-
-
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -184,17 +154,12 @@ const MiniDrawer = () => {
                                 onClick={handleMenu}
                                 color="inherit"
                             >
-                                <AccountCircle />
-
-
-                                <MenuItem onClick={handleClose}>{authContext.authUser.userName}</MenuItem>
+                                <AccountCircle onClick={handleLogout} />
+                                <MenuItem onClick={handleClose}>Logout{authContext.authUser.userName}</MenuItem>
                             </IconButton>
-
                         </div>
                     )}
-
                 </Toolbar>
-
             </AppBar>
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
@@ -239,29 +204,24 @@ const MiniDrawer = () => {
                             </IconButton>
                         </ListItem></Link>
                 </List>
-
                 <Divider />
                 <Link to="/table">
                     <List >
                         <ListItem>
                             <IconButton>
-
                                 <ListItemIcon>
                                     <PageviewIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Locations" />
-
                             </IconButton>
                         </ListItem>
                     </List>
                 </Link>
-
                 <Divider />
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
                 <Router />
-
             </Box>
         </Box>
     );
