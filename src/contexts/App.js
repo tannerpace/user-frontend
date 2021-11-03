@@ -35,7 +35,6 @@ export const AppContainer = ({ children, ...props }) => {
                     setAuthUserState(account)
                     setToken(token)
 
-
                 },
                 (error) => {
                     console.log(error)
