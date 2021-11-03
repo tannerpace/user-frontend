@@ -121,8 +121,10 @@ function MyTable() {
                         </TableRow>
                     ))}
                 </TableBody>
-                <TableFooter>
+
+                <TableFooter >
                     <TablePagination
+
                         rowsPerPageOptions={[5, 10, 15]}
                         component="div"
                         count={locations?.length}
@@ -141,8 +143,9 @@ function MyTable() {
                         }}
                     />
                 </TableFooter>
+
             </Table>
-        </TableContainer>
+        </TableContainer >
     );
 }
 

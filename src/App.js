@@ -2,7 +2,6 @@
 import './App.css';
 
 import { AppContainer } from './contexts/App';
-import { LocationWeatherContainer } from './contexts/LocationWeather';
 import React from 'react';
 
 // import PropTypes from "prop-types"
@@ -11,7 +10,16 @@ import React from 'react';
 // import { useIndexedDB } from "react-indexed-db"
 // import { BrowserRouter } from "react-router-dom"
 import { initDB } from "react-indexed-db"
+//use the LocationWeatherProvider to get the weather data
 import MiniDrawer from './components/MiniDrawer';
+import { LocationWeatherContainer } from './contexts/LocationWeather';
+//use the LocationWeatherProvider to get the weather data
+
+
+
+
+
+
 initDB({
   name: "UserApp",
   version: 1,
@@ -27,13 +35,25 @@ initDB({
   ],
 })
 
+
+
+
+
+
+
 const App = () => {
+
+
   return (
+
     <AppContainer>
-      <LocationWeatherContainer>
-        <MiniDrawer />
-      </LocationWeatherContainer>
+
+      <MiniDrawer />
+
     </AppContainer>
+
+
+
   );
 }
 

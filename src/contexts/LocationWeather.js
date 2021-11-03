@@ -16,7 +16,6 @@ export const LocationWeatherContainer = ({ children, ...props }) => {
     const [location, setLocation] = useState('');
     const [weather, setWeather] = useState('');
     const [id, setId] = useState('id');
-    const [shouldRender, setShouldRender] = useState(false)
 
     const { data, status } = useQuery(["location", id], () => getLocation(id))
 
@@ -50,16 +49,15 @@ export const LocationWeatherContainer = ({ children, ...props }) => {
             // currentWindDirection,
             // windDirectionCheck
         }}>
-            {shouldRender && children}
-            {!shouldRender && null}
+            {children}
         </LocationWeatherContainer.Provider>
     )
 }
 
-// LocationWeatherContainer.propTypes = {
-//     children: PropTypes.node,
+LocationWeatherContainer.propTypes = {
+    children: PropTypes.node,
 
-// }
+}
 
 
 
