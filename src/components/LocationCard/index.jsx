@@ -1,44 +1,32 @@
 // a static functional componet that displays all information about a data
-import { Typography } from '@mui/material';
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import ExpandMoreIcon from '@mui/material/Icon';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/material/Icon';
-import ShareIcon from '@mui/material/Icon';
-import MoreVertIcon from '@mui/material/Icon';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import { FcExpand, FcShare } from "react-icons/fc";
-import { BsChevronExpand } from "react-icons/bs";
-import { MdExpandLess } from 'react-icons/md'
+import { Typography } from '@mui/material'
+import * as React from 'react'
+import { styled } from '@mui/material/styles'
+import Card from '@mui/material/Card'
+import CardHeader from '@mui/material/CardHeader'
+import CardMedia from '@mui/material/CardMedia'
+import CardContent from '@mui/material/CardContent'
+import CardActions from '@mui/material/CardActions'
+import Collapse from '@mui/material/Collapse'
+import Avatar from '@mui/material/Avatar'
+import IconButton from '@mui/material/IconButton'
+import MoreVertIcon from '@mui/material/Icon'
+import { GoogleMap, LoadScript } from '@react-google-maps/api'
+import { FcExpand } from "react-icons/fc"
 import { GrFavorite } from 'react-icons/gr'
 import { BiWind } from 'react-icons/bi'
 import { GiWaveSurfer } from 'react-icons/gi'
 import { GiIsland } from 'react-icons/gi'
-import { FaFacebookSquare, FaInstagram, FaTwitterSquare, FaYoutubeSquare, FaLinkedin, FaReddit } from 'react-icons/fa'
-import { ImLinkedin, ImFacebook, ImInstagram, ImTwitter, ImYoutube } from 'react-icons/im'
-import getLevelIcon from '../../utils/getLevelIcon';
-import { Theme } from '@mui/material';
+import { FaFacebookSquare, FaLinkedin, FaReddit } from 'react-icons/fa'
+import getLevelIcon from '../../utils/getLevelIcon'
+
 
 import {
-  EmailShareButton,
   FacebookShareButton,
-
   LinkedinShareButton,
-
   RedditShareButton,
-
-} from "react-share";
-import WeatherCard from '../WeatherCard';
-
+} from "react-share"
+import WeatherCard from '../WeatherCard'
 
 const url = process.env.REACT_APP_API_ENDPOINT
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY

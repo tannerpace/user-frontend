@@ -37,6 +37,12 @@ const styles = makeStyles((theme) => ({
         color: "#190D27",
         opacity: "0.48",
     },
+    hidecard: {
+        position: "absolute",
+        top: "1000",
+        left: "0",
+        display: "none",
+    },
 }))
 
 export default styles

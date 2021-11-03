@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import {
   Box,
   Button,
-  CircularProgress,
+
   IconButton,
   InputAdornment,
   Typography,
@@ -12,19 +12,18 @@ import {
 
 
   Input,
-  Divider,
+
 } from "@mui/material"
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState, useEffect, useRef } from "react"
 import App from "../../../contexts/App"
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useMutation, useQueryClient } from "react-query"
+import { useQueryClient } from "react-query"
 import { useHistory } from "react-router-dom"
 import serialize from "../../../store/serialize"
 // import { userLogin } from "../../../actions/User/users"
 import PropTypes from "prop-types"
 import LinearProgress from '@mui/material/LinearProgress';
-import AppContext from "../../../contexts/App"
 import useStyles from "./styles"
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -38,23 +37,22 @@ const schema = yup.object({
 }).required();
 
 const LoginForm = ({ setIsLogin }) => {
-  const history = useHistory()
+
 
   const [visibility, setVisibility] = useState(true)
   const classes = useStyles()
-
   const queryClient = useQueryClient()
   const [loading, setLoading] = useState(false)
   const authContext = useContext(App)
-  const { token } = useContext(App)
   const { loginMutation } = useContext(App)
   const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(schema) });
-
+  const history = useHistory()
+  const isInitialMount = useRef(true);
   const onSubmit = (data) => {
     setLoading(true)
     let values = data
     loginMutation.mutate(values, {
-      onSuccess: (res) => {
+      onSuccess: (res, cb) => {
         console.log(` succsess res`, res)
         serialize("user", res.user)
           .then(async (serializedData) => {
@@ -65,9 +63,8 @@ const LoginForm = ({ setIsLogin }) => {
             authContext.openSnackBar({
               message: "Login successful!",
             })
-            //if the user is in the app close the dialog and redirect to my account
 
-
+            //clean
             return queryClient.setQueryData("user", (oldState) => {
               return serializedData
             })
@@ -95,32 +92,30 @@ const LoginForm = ({ setIsLogin }) => {
   console.log(`authContext.authUser`, authContext.authUser)
 
   useEffect(() => {
-    if (authContext && authContext.token) {
-      setLoading(false)
-
-      //do something afterlogin
-      // console.log(`history push`, history)
-      // history.push("/messages")
-
-
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      if (authContext && authContext.token) {
+        setLoading(false)
+        history.push("/table")
+      }
     }
-  }, [authContext])
+  }, [authContext]);
 
   return (
-    <Box className={classes.root}>
+    <Box >
       <Box className={classes.inputContainer}>
         {loading ? <LinearProgress
           color="secondary">
-
         </LinearProgress> :
           <form
             onSubmit={handleSubmit(onSubmit)}
           ><Typography className={classes.welcome}>
               Welcome to Kite.io</Typography>
-            {/* <Typography className={classes.loginHeader}
-          >
-            Login In
-          </Typography> */}
+            <Typography className={classes.loginHeader}>
+              Login to your account
+
+            </Typography>
             <Box className={classes.feildContainer}>
               <Input
                 style={{
@@ -171,8 +166,6 @@ const LoginForm = ({ setIsLogin }) => {
 
               <Button className={classes.loginButton}
                 type="submit"
-                variant="text"
-
                 disabled={loading}
 
               >
@@ -186,24 +179,7 @@ const LoginForm = ({ setIsLogin }) => {
                 Click Here
               </Typography>
             </Box>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </form>}
-
-
         {/* {authContext.authUser ? <h1> authUser Logged In!</h1> : <h1>authUser Not Logged in</h1>}
       {token ? <h1> Token Logged In!</h1> : <h1>Token Not Logged in</h1>} */}
       </Box >

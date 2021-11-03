@@ -62,6 +62,17 @@ function MyTable() {
     };
 
 
+    //a const to increment page
+    const incrementPage = () => {
+        setPage(page + 1);
+    }
+
+    //a const to decrement page
+    const decrementPage = () => {
+        setPage(page - 1);
+    }
+
+
     return (
         <TableContainer component={Paper} className={classes.tableContainer}>
             <Table className={classes.table} aria-label="simple table">
@@ -120,6 +131,15 @@ function MyTable() {
                         page={page}
                         onChangePage={handleChangePage}
                         onChangeRowsPerPage={handleChangeRowsPerPage}
+
+                        backIconButtonProps={{
+                            'aria-label': 'Previous Page',
+                            onClick: decrementPage,
+                        }}
+                        nextIconButtonProps={{
+                            'aria-label': 'Next Page',
+                            onClick: incrementPage
+                        }}
                     />
                 </TableFooter>
             </Table>

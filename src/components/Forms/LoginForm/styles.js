@@ -5,15 +5,11 @@ import ronephoto from "./ronephoto.png"
 
 const styles = makeStyles((theme) => ({
 
-    root: {
-        color: theme.palette.secondary.contrastText
-    },
     welcome: {
         textAlign: "center",
-        fontSize: "2rem",
+        fontSize: "5rem !important",
         fontWeight: "bold",
-        // color: theme.palette.primary.contrastText,
-        color: theme.palette.secondary.main,
+        color: theme.palette.primary.contrastText,
         margin: theme.spacing(3, 0, 1, 0),
         textShadow: "2px 2px 2px #000000"
     },
@@ -21,10 +17,10 @@ const styles = makeStyles((theme) => ({
     loginHeader: {
         width: "100%",
         margin: "0 auto",
-        fontSize: "2.5rem",
+        fontSize: "2rem !important",
         textAlign: "center",
         padding: "1rem 0",
-        color: theme.palette.primary.contrastText,
+        color: theme.palette.secondary.contrastText,
     },
 
     inputContainer: {
@@ -40,7 +36,6 @@ const styles = makeStyles((theme) => ({
         margin: "0 auto",
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(10),
-
         alignSelf: "center",
         display: "flex",
         flexDirection: "column",
@@ -63,17 +58,14 @@ const styles = makeStyles((theme) => ({
         color: theme.palette.error.main,
     },
 
-
-
     loginButton: {
         margin: "auto",
         marginTop: theme.spacing(2),
         height: "35px",
         marginBottom: theme.spacing(2),
-        backgroundColor: theme.palette.secondary.dark,
-        color: theme.palette.primary.contrastText,
+        backgroundColor: theme.palette.primary.main,
+        color: "white !important",
         textShadow: ".5px .5px .5px #000000",
-
         width: "180px",
         "&: hover": {
 
@@ -84,14 +76,13 @@ const styles = makeStyles((theme) => ({
 
     noAccount: {
         justifyContent: "center",
-        fontSize: "1.2rem",
+        // fontSize: "1.2rem",
         lineHeight: "1.66",
         display: "flex",
         width: "100%",
         marginBottom: theme.spacing(3),
         alignContent: "flex-end",
         color: theme.palette.primary.contrastText,
-
         "&:hover": {
             cursor: "pointer",
 
@@ -101,7 +92,7 @@ const styles = makeStyles((theme) => ({
     buttonRoot: {
         fontWeight: 500,
         textTransform: "uppercase",
-        fontSize: "1.2rem",
+        // fontSize: "1.2rem",
         minHeight: 45,
     },
 
