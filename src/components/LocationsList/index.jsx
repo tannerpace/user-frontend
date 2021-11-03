@@ -24,24 +24,15 @@ const columns = [
 export default function LocationsList() {
 
     const { data: locations } = useQuery("locationList", () => getLocations())
-    console.log("locations", locations)
-
-
-
 
     const allLocation = locations?.map(x => {
         return (<Box key={x.id}><h1>{x.locationname}</h1>
             <Typography>{x.description}</Typography></Box>)
     })
 
-
-
-
-
     return (
         <div style={{ height: "100vh", width: "100%", marginTop: "60px" }}>
             {/* <DataGrid rows={rows} columns={columns} /> */}
-
             <button >Locations Button</button>
             <div>{allLocation}</div>
         </div>

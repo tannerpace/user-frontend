@@ -2,6 +2,7 @@
 import './App.css';
 
 import { AppContainer } from './contexts/App';
+import { LocationWeatherContainer } from './contexts/LocationWeather';
 import React from 'react';
 
 // import PropTypes from "prop-types"
@@ -10,10 +11,6 @@ import React from 'react';
 // import { useIndexedDB } from "react-indexed-db"
 // import { BrowserRouter } from "react-router-dom"
 import { initDB } from "react-indexed-db"
-
-
-
-
 import MiniDrawer from './components/MiniDrawer';
 initDB({
   name: "UserApp",
@@ -30,16 +27,12 @@ initDB({
   ],
 })
 
-
-
-
-
-
-
 const App = () => {
   return (
     <AppContainer>
-      <MiniDrawer />
+      <LocationWeatherContainer>
+        <MiniDrawer />
+      </LocationWeatherContainer>
     </AppContainer>
   );
 }

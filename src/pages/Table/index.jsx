@@ -12,9 +12,6 @@ import MyTable from "../../components/MyTable";
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true)
 
-
-
-
     return (
         <Page>
             <MyTable />

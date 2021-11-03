@@ -219,7 +219,7 @@ const MiniDrawer = () => {
                 </Link>
                 <Divider />
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box component="main" sx={{ flexGrow: 1, padding: 3 }}>
                 <DrawerHeader />
                 <Router />
             </Box>

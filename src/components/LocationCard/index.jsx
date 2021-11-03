@@ -54,9 +54,6 @@ const MyMap = ({ lat, lng }) => {
   )
 }
 
-
-
-
 const MyMapper = React.memo(MyMap)
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -82,9 +79,10 @@ export default function LocationCard({ data }) {
       style={{ width: "100%", margin: "auto", backgroundColor: "#FAF9F6" }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: "#E2E7EF" }} aria-label="location">
-            {data.locationname.charAt(0)}
-          </Avatar>
+          // <Avatar sx={{ bgcolor: "#E2E7EF" }} aria-label="location">
+          //   {data.locationname.charAt(0)}
+          // </Avatar>
+          <WeatherCard points={{ lat: data.latitude, lng: data.longitude }} />
         }
         action={
           <IconButton aria-label="settings">
@@ -96,7 +94,7 @@ export default function LocationCard({ data }) {
       />
       <MyMapper lat={data.latitude} lng={data.longitude} />
       <CardContent><br></br>
-        <WeatherCard points={{ lat: data.latitude, lng: data.longitude }} />
+
         <Typography paragraph>
           Wind Directions <br></br> <BiWind></BiWind>  {data.winddirections}
         </Typography>

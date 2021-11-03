@@ -131,7 +131,6 @@ function MyTable() {
                         page={page}
                         onChangePage={handleChangePage}
                         onChangeRowsPerPage={handleChangeRowsPerPage}
-
                         backIconButtonProps={{
                             'aria-label': 'Previous Page',
                             onClick: decrementPage,

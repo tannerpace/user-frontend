@@ -9,7 +9,7 @@ const MessagesContext = createContext()
 export default MessagesContext
 
 export const MessagesContainer = ({ children }) => {
-    const { authUser, isClerk, isAdmin, isSuperAdmin } = useContext(AppContext)
+    const { authUser, isTrue, isAdmin } = useContext(AppContext)
     const [selectedThread, setSelectedThread] = useState(null)
 
     // Create threads
@@ -21,9 +21,9 @@ export const MessagesContainer = ({ children }) => {
         data: threads,
         isLoading: threadsDataLoading,
         refetch: refetchThreads,
-    } = useQuery(["threads", authUser], () => getThreads(isClerk), {
+    } = useQuery(["threads", authUser], () => getThreads(isTrue), {
         refetchInterval: 3000,
-        enabled: !isEmpty(authUser) && (isAdmin || !isClerk),
+        enabled: !isEmpty(authUser) && (isAdmin || !isTrue),
     })
 
     return (

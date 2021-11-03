@@ -25,8 +25,6 @@ export const AppContainer = ({ children, ...props }) => {
     const [shouldRender, setShouldRender] = useState(false)
     const queryClient = useQueryClient()
 
-
-
     const setAuthData = ({ token, account }) => {
 
         console.log(`setting auth data for account`, account)

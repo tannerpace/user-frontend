@@ -5,14 +5,14 @@ import { useQuery } from 'react-query';
 import { getWeather } from '../utils/getWeather';
 import { getLocation } from '../actions/Location/locations';
 import { useMutation, useQuery, useQueryClient } from "react-query"
-
+import PropTypes from "prop-types"
 const LocationWeatherContext = createContext();
 export default LocationWeatherContext
 
 
 //create a provider for the context use the id to get the location data from getLocation
 //use the data.location.lat and data.location.lon to get the weather data
-const LocationWeatherContainer = ({ children, ...props }) => {
+export const LocationWeatherContainer = ({ children, ...props }) => {
     const queryClient = useQueryClient();
     const [location, setLocation] = useState('');
     const [weather, setWeather] = useState('');
@@ -51,13 +51,17 @@ const LocationWeatherContainer = ({ children, ...props }) => {
     )
 }
 
-
-
-
-
-
-
-
+LocationWeatherContainer.propTypes = {
+    children: PropTypes.node,
 
 }
+
+
+
+
+
+
+
+
+
 
