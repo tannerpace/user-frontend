@@ -2,7 +2,7 @@
 import React, { createContext } from 'react';
 import { useState } from 'react';
 
-import { getWeather } from '../utils/getWeather';
+import getWeather from '../utils/getWeather';
 import { getLocation } from '../actions/Location/locations';
 import { useMutation, useQuery, useQueryClient } from "react-query"
 import PropTypes from "prop-types"
@@ -14,14 +14,17 @@ export default LocationWeatherContext
 //use the data.location.lat and data.location.lon to get the weather data
 export const LocationWeatherContainer = ({ children, ...props }) => {
   const queryClient = useQueryClient();
-  const [location, setLocation] = useState('');
-  const [weather, setWeather] = useState('');
-  const [id, setId] = useState('id');
   const { data, status } = useQuery(["location", id], () => getLocation(id))
-  const currentWeather = useQuery(["weather", points], () => getWeather(points))
   const lat = data?.latitude
   const lng = data?.longitude
   const points = { lat, lng }
+  const [location, setLocation] = useState('');
+  const [weather, setWeather] = useState('');
+  const [id, setId] = useState('id');
+
+  const currentWeather = useQuery(["weather", points], () => getWeather(points))
+
+
 
   // a const to check if the data.winddirection arrat has the value of the current weather.properties.periods[0].windDirection
   const windDirection = data?.windDirection
@@ -29,7 +32,7 @@ export const LocationWeatherContainer = ({ children, ...props }) => {
   const windDirectionCheck = windDirection.includes(currentWindDirection)
 
   return (
-    <LocationWeather.Provider value={{
+    <LocationWeatherContainer.Provider value={{
       location,
       weather,
       setLocation,
@@ -47,7 +50,7 @@ export const LocationWeatherContainer = ({ children, ...props }) => {
       windDirectionCheck
     }}>
       {children}
-    </LocationWeather.Provider>
+    </LocationWeatherContainer.Provider>
   )
 }
 
